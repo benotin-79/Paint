@@ -11,6 +11,9 @@ public class Ellipse extends Figure{
         int width=0;
     };
 
+    public Ellipse() {
+    }
+
     @Override
     public void setBoundingBox(int heightBB, int widthBB) {
 
