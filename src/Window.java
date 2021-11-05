@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener {
 
         public Window(String Title, int x, int y) {
                 super(Title);
                 this.setSize(x, y);
                 this.setVisible(true);
+                // Le bouton close termine l'application
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                 Container contentPanel = this.getContentPane();
@@ -26,6 +29,9 @@ public class Window extends JFrame {
                 m.add(menu1);
 
                 JMenu menu2 = new JMenu("A propos");
+                JMenuItem authors = new JMenuItem("Auteur");
+                menu2.add(authors);
+                authors.addActionListener(this);
                 m.add(menu2);
 
                 setJMenuBar(m);
@@ -36,10 +42,12 @@ public class Window extends JFrame {
                 noir.setOpaque(true);
                 noir.setBackground(Color.BLACK);
                 noir.setForeground(Color.WHITE);
+                noir.addActionListener(this);
                 JButton rouge = new JButton("Rouge");
                 contentPanel.add(rouge);
                 rouge.setOpaque(true);
                 rouge.setBackground(Color.RED);
+                rouge.addActionListener(this);
                 JButton vert = new JButton("vert");
                 contentPanel.add(vert);
                 vert.setOpaque(true);
@@ -75,27 +83,55 @@ public class Window extends JFrame {
                 contentPanel.add(carre);
 
                 /**********  Localisation des boutons  **********/
+                /** we'll be using three
+JPanel : two to stack the Figure button and the color button, and one with our
+Drawing, the next classes that will extend JPanel. **/
+                JPanel southLeftPanel = new JPanel();
+                southLeftPanel.setLayout(new GridLayout(2,4));
+                southLeftPanel.add(noir);
+                southLeftPanel.add(rouge);
+                southLeftPanel.add(vert);
+                southLeftPanel.add(bleu);
+                southLeftPanel.add(jaune);
+                southLeftPanel.add(rose);
+                southLeftPanel.add(magenta);
+                southLeftPanel.add(orange);
+                contentPanel.add(southLeftPanel,"South");
+
+                JPanel southRightPanel = new JPanel();
+                southRightPanel.setLayout(new GridLayout(2,2));
+                southRightPanel.add(ellipse);
+                southRightPanel.add(cercle);
+                southRightPanel.add(rectangle);
+                southRightPanel.add(carre);
+                contentPanel.add(southRightPanel,"South");
+
                 JPanel southPanel = new JPanel();
-                southPanel.setLayout(new GridLayout(2,6));
-                southPanel.add(noir);
-                southPanel.add(rouge);
-                southPanel.add(vert);
-                southPanel.add(bleu);
-                southPanel.add(ellipse);
-                southPanel.add(cercle);
-                southPanel.add(jaune);
-                southPanel.add(rose);
-                southPanel.add(magenta);
-                southPanel.add(orange);
-                southPanel.add(rectangle);
-                southPanel.add(carre);
+                southPanel.setLayout(new GridLayout(1,2));
+                southPanel.add(southLeftPanel);
+                southPanel.add(southRightPanel);
                 contentPanel.add(southPanel,"South");
 
+                // Rend la fenêtre visible
                 this.setVisible(true);
+        }
+
+        /**********  Treat every click on the Button or in the Menu  **********/
+        @Override
+        public void actionPerformed(ActionEvent e){
+                String cmd = e.getActionCommand();
+                switch (cmd) {
+                        case "Auteur":
+                                JOptionPane info = new JOptionPane();
+                                info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
+                                        "information",JOptionPane.INFORMATION_MESSAGE);
+                        case "Noir":
+                                System.out.println("I've been clicked !");
+                                break;
+                }
         }
 
         public static void main(String args[]) {
                 Window win = new Window("Paint", 800, 600);
         }
-
 }
