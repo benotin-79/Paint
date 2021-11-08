@@ -6,15 +6,16 @@ import java.awt.event.ActionListener;
 public class Window extends JFrame implements ActionListener {
 
         public Window(String Title, int x, int y) {
+                // Ajoute un titre à la fenêtre
                 super(Title);
+                // Dimensione la taille de la fenêtre
                 this.setSize(x, y);
-                this.setVisible(true);
+                // Rend la fenêtre visible
+                // this.setVisible(true);
                 // Le bouton close termine l'application
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                Container contentPanel = this.getContentPane();
-
-                /**********  Créations de la barre de menus  **********/
+                /**********  Création de la barre de menu  **********/
                 JMenuBar m = new JMenuBar();
 
                 JMenu menu1 = new JMenu("File");
@@ -36,7 +37,12 @@ public class Window extends JFrame implements ActionListener {
 
                 setJMenuBar(m);
 
-                /**********  Créations des boutons  **********/
+
+                /**********  provides a space where a component can be located **********/
+                Container contentPanel = this.getContentPane();
+
+
+                /**********  Créations des boutons (couleurs et figures) **********/
                 JButton noir = new JButton("Noir");
                 contentPanel.add(noir);
                 noir.setOpaque(true);
@@ -52,40 +58,50 @@ public class Window extends JFrame implements ActionListener {
                 contentPanel.add(vert);
                 vert.setOpaque(true);
                 vert.setBackground(Color.GREEN);
+                vert.addActionListener(this);
                 JButton bleu = new JButton("Bleu");
                 contentPanel.add(bleu);
                 bleu.setOpaque(true);
                 bleu.setBackground(Color.BLUE);
                 bleu.setForeground(Color.WHITE);
-                JButton ellipse = new JButton("Ellipse");
-                contentPanel.add(ellipse);
-                JButton cercle = new JButton("Cercle");
-                contentPanel.add(cercle);
+                bleu.addActionListener(this);
                 JButton jaune = new JButton("Jaune");
                 contentPanel.add(jaune);
                 jaune.setOpaque(true);
                 jaune.setBackground(Color.YELLOW);
+                jaune.addActionListener(this);
                 JButton rose = new JButton("Rose");
                 contentPanel.add(rose);
                 rose.setOpaque(true);
                 rose.setBackground(Color.PINK);
+                rose.addActionListener(this);
                 JButton magenta = new JButton("Magenta");
                 contentPanel.add(magenta);
                 magenta.setOpaque(true);
                 magenta.setBackground(Color.MAGENTA);
+                magenta.addActionListener(this);
                 JButton orange = new JButton("Orange");
                 contentPanel.add(orange);
                 orange.setOpaque(true);
                 orange.setBackground(Color.ORANGE);
+                orange.addActionListener(this);
+
+                JButton ellipse = new JButton("Ellipse");
+                contentPanel.add(ellipse);
+                ellipse.addActionListener(this);
+                JButton cercle = new JButton("Cercle");
+                contentPanel.add(cercle);
+                cercle.addActionListener(this);
                 JButton rectangle = new JButton("Rectangle");
                 contentPanel.add(rectangle);
+                rectangle.addActionListener(this);
                 JButton carre = new JButton("Carre");
                 contentPanel.add(carre);
+                carre.addActionListener(this);
 
                 /**********  Localisation des boutons  **********/
-                /** we'll be using three
-JPanel : two to stack the Figure button and the color button, and one with our
-Drawing, the next classes that will extend JPanel. **/
+                /** 3 JPanel : 2 to stack Figure button & color button,
+                 and 1 with our Drawing, the next classes that will extend JPanel. **/
                 JPanel southLeftPanel = new JPanel();
                 southLeftPanel.setLayout(new GridLayout(2,4));
                 southLeftPanel.add(noir);
@@ -126,6 +142,7 @@ Drawing, the next classes that will extend JPanel. **/
                                 info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
                                         "information",JOptionPane.INFORMATION_MESSAGE);
                         case "Noir":
+                                //Drawing.setColor(Color.BLACK);
                                 System.out.println("I've been clicked !");
                                 break;
                 }
