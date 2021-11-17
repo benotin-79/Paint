@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame implements ActionListener {
+        //Créer une instance de type Drawing dans la class Window
+        Drawing drawing=new Drawing();
 
         public Window(String Title, int x, int y) {
                 // Ajoute un titre à la fenêtre
@@ -128,6 +130,9 @@ public class Window extends JFrame implements ActionListener {
                 southPanel.add(southRightPanel);
                 contentPanel.add(southPanel,"South");
 
+                //allow the drawing instance to work on the GUI
+                contentPanel.add(drawing, "Center");
+
                 // Rend la fenêtre visible
                 this.setVisible(true);
         }
@@ -142,8 +147,12 @@ public class Window extends JFrame implements ActionListener {
                                 info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
                                         "information",JOptionPane.INFORMATION_MESSAGE);
                         case "Noir":
-                                //Drawing.setColor(Color.BLACK);
-                                System.out.println("I've been clicked !");
+                                //System.out.println("I've been clicked !");
+                                drawing.setColor(Color.black);
+                                break;
+                        case "Rectangle" :
+                                System.out.println("Rectangle");
+                                drawing.setNameFigure("Rectangle");
                                 break;
                 }
         }
