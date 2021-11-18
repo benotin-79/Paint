@@ -1,18 +1,19 @@
 import java.awt.*;
 
 public abstract class Figure{
-    private Point origin;
+    // protected allow the variable to be accessible in other subclass like Rectangle class
+    protected Point origin;
     protected Color color;
 
-    protected Figure() {}
-
-    public Color getColor() {return color;}
-    public Point getOrigin() {return origin;}
+    public void setOrigin(int x, int y) {
+        origin.setX(x);
+        origin.setY(y);
+    }
 
     public abstract void setBoundingBox(int heightBB, int widthBB);
     public abstract void draw (Graphics g);
 
-    public Figure(Color c, Point p){
+    public Figure(Point p,Color c){
         this.color=c;
         this.origin = p;
     }

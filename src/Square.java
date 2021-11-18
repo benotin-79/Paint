@@ -3,7 +3,7 @@ import java.awt.*;
 public class Square extends Rectangle{
 
     public Square(int px, int py, Color c) {
-        Rectangle square= new Rectangle(px, py, c);
+        super(px,py, c);
     }
 
     @Override

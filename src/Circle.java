@@ -3,7 +3,7 @@ import java.awt.*;
 public class Circle extends Ellipse{
 
     public Circle(int px, int py, Color c) {
-        Ellipse square= new Ellipse(px, py, c);
+        super(px,py, c);
     }
 
     @Override

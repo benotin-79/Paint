@@ -4,17 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame implements ActionListener {
-        //Créer une instance de type Drawing dans la class Window
+        // Create a type Drawing instance in the class Window
         Drawing drawing=new Drawing();
 
         public Window(String Title, int x, int y) {
-                // Ajoute un titre à la fenêtre
+                // The first argument will add a title to the window
                 super(Title);
-                // Dimensione la taille de la fenêtre
+                // The second and third argument will set the size of the window
                 this.setSize(x, y);
-                // Rend la fenêtre visible
-                // this.setVisible(true);
-                // Le bouton close termine l'application
+                // When we close the window, it will end the process
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                 /**********  Création de la barre de menu  **********/
@@ -44,7 +42,7 @@ public class Window extends JFrame implements ActionListener {
                 Container contentPanel = this.getContentPane();
 
 
-                /**********  Créations des boutons (couleurs et figures) **********/
+                /*---------  Créations des boutons (couleurs et figures) ----------*/
                 JButton noir = new JButton("Noir");
                 contentPanel.add(noir);
                 noir.setOpaque(true);
@@ -147,7 +145,7 @@ public class Window extends JFrame implements ActionListener {
                                 info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
                                         "information",JOptionPane.INFORMATION_MESSAGE);
                         case "Noir":
-                                //System.out.println("I've been clicked !");
+                                System.out.println("Black");
                                 drawing.setColor(Color.black);
                                 break;
                         case "Rectangle" :
@@ -157,7 +155,9 @@ public class Window extends JFrame implements ActionListener {
                 }
         }
 
-        public static void main(String args[]) {
-                Window win = new Window("Paint", 800, 600);
+        // Execution of the program
+        public static void main(String[] args) {
+                // Creation of a new window
+                new Window("Paint", 800, 600);
         }
 }

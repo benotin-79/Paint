@@ -19,6 +19,6 @@ public class Point {
 
     public Point(int a,int b){
         this.X=a;
-        this.Y=a;
+        this.Y=b;
     }
 }

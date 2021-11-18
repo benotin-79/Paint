@@ -31,13 +31,30 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         this.addMouseMotionListener(this);
 
     }
+    // This method is needed to draw something on JPanel other than drawing the background color.
+    @Override
+    public void paintComponent(Graphics g){
+        // The line just below allow the draw function to work well, if we remove this some weird things appear
+        super.paintComponent(g);
+        // Each name of figure on the ArrayList is converted on his real function here with a color and a size.
+        for(Figure f : listFigure){
+            // It's a loop! It keeps in memory the last figure pressed to draw
+            f.draw(g);
+        }
+    }
 
+    //Abstract method from mouseMotionListener
 
     @Override
     //when a mouse button is pressed on a component and then dragged
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {
+
+    }
     public void mouseMoved(MouseEvent e) {}
     //mouseClicked is when the mouse button has been pressed and released
+
+    // Abstract method from mouseListener
+
     public void mouseClicked(MouseEvent e) {
         //Figures in our ArrayList could have stored here
     }
@@ -49,14 +66,13 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         y = e.getY();
         System.out.println("("+x+";"+y+")");
 
-        //When we pressed a figure button on the GUI, it will store the figure in our ArrayList
+        //When we pressed a figure button on the GUI, it will store the name figure in our ArrayList
         switch (nameFigure) {
             case "Ellipse":
                 listFigure.add(new Ellipse(x, y, this.currentColor));
                 break;
             case "Rectangle":
                 listFigure.add(new Rectangle(x, y, this.currentColor));
-                System.out.println("Rectangle de taille nulle ajouté à la liste !");
                 break;
             case "Cercle":
                 listFigure.add(new Circle(x, y, this.currentColor));
