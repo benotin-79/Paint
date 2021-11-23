@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public abstract class Figure{
-    // protected allow the variable to be accessible in other subclass like Rectangle class
+    // protected allow the variable to be accessible in others subclasses like Rectangle class
     protected Point origin;
     protected Color color;
 
@@ -22,5 +22,4 @@ public abstract class Figure{
     public String toString(){
         return "Figure: " + origin + "\nCouleur: " + color;
     }
-
 }

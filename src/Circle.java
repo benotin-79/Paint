@@ -8,10 +8,9 @@ public class Circle extends Ellipse{
 
     @Override
     public void setBoundingBox(int heightBB, int widthBB) {
-
+        // semiAxisX takes the largest value between heightBB/2 and widthBB/2
+        semiAxisX = Math.max(heightBB,widthBB)/2;
+        // property of a circle!
+        semiAxisY = semiAxisX;
     }
-
-    @Override
-    public void draw(Graphics g) {};
-
 }

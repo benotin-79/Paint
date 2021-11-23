@@ -54,7 +54,7 @@ public class Window extends JFrame implements ActionListener {
                 rouge.setOpaque(true);
                 rouge.setBackground(Color.RED);
                 rouge.addActionListener(this);
-                JButton vert = new JButton("vert");
+                JButton vert = new JButton("Vert");
                 contentPanel.add(vert);
                 vert.setOpaque(true);
                 vert.setBackground(Color.GREEN);
@@ -137,21 +137,57 @@ public class Window extends JFrame implements ActionListener {
 
         /**********  Treat every click on the Button or in the Menu  **********/
         @Override
+        // actionPerformed handles all the actions of a component
         public void actionPerformed(ActionEvent e){
-                String cmd = e.getActionCommand();
+            // if the case value has the same value of the text in the pressed button, the case will be executed.
+            String cmd = e.getActionCommand();
                 switch (cmd) {
-                        case "Auteur":
-                                JOptionPane info = new JOptionPane();
-                                info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
-                                        "information",JOptionPane.INFORMATION_MESSAGE);
-                        case "Noir":
-                                System.out.println("Black");
-                                drawing.setColor(Color.black);
-                                break;
-                        case "Rectangle" :
-                                System.out.println("Rectangle");
-                                drawing.setNameFigure("Rectangle");
-                                break;
+                    case "Auteur":
+                        JOptionPane info = new JOptionPane();
+                        info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
+                                "information",JOptionPane.INFORMATION_MESSAGE);
+
+                    case "Noir":
+                        System.out.println("Black");
+                        // set a new color to the drawing object
+                        drawing.setColor(Color.black);
+                        break;
+                    case "Rouge" :
+                        drawing.setColor(Color.red);
+                        break;
+                    case "Bleu" :
+                        drawing.setColor(Color.blue);
+                        break;
+                    case "Vert" :
+                        drawing.setColor(Color.green);
+                        break;
+                    case "Jaune" :
+                        drawing.setColor(Color.yellow);
+                        break;
+                    case "Rose" :
+                        drawing.setColor(Color.pink);
+                        break;
+                    case "Magenta" :
+                        drawing.setColor(Color.magenta);
+                        break;
+                    case "Orange" :
+                        drawing.setColor(Color.orange);
+                        break;
+
+                    case "Rectangle" :
+                        // set a new figure to the drawing objet.
+                        System.out.println("Rectangle");
+                        drawing.setNameFigure("Rectangle");
+                        break;
+                    case "Ellipse" :
+                        drawing.setNameFigure("Ellipse");
+                        break;
+                    case "Cercle" :
+                        drawing.setNameFigure("Cercle");
+                        break;
+                    case "Carre" :
+                        drawing.setNameFigure("Carré");
+                        break;
                 }
         }
 
