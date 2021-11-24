@@ -15,18 +15,16 @@ public class Window extends JFrame implements ActionListener {
                 // When we close the window, it will end the process
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                /**********  Création de la barre de menu  **********/
+                // Menu bar creation
                 JMenuBar m = new JMenuBar();
 
                 JMenu menu1 = new JMenu("File");
                 JMenuItem nouveau = new JMenuItem("New");
                 menu1.add(nouveau);
-                JMenuItem open = new JMenuItem("Open");
-                menu1.add(open);
-                JMenuItem save = new JMenuItem("Save");
-                menu1.add(save);
+                nouveau.addActionListener(this);
                 JMenuItem quit = new JMenuItem("Quit");
                 menu1.add(quit);
+                quit.addActionListener(this);
                 m.add(menu1);
 
                 JMenu menu2 = new JMenu("A propos");
@@ -38,11 +36,11 @@ public class Window extends JFrame implements ActionListener {
                 setJMenuBar(m);
 
 
-                /**********  provides a space where a component can be located **********/
+                // provides a space where a component can be located
                 Container contentPanel = this.getContentPane();
 
 
-                /*---------  Créations des boutons (couleurs et figures) ----------*/
+                // Creation of color button and figure button
                 JButton noir = new JButton("Noir");
                 contentPanel.add(noir);
                 noir.setOpaque(true);
@@ -99,9 +97,9 @@ public class Window extends JFrame implements ActionListener {
                 contentPanel.add(carre);
                 carre.addActionListener(this);
 
-                /**********  Localisation des boutons  **********/
-                /** 3 JPanel : 2 to stack Figure button & color button,
-                 and 1 with our Drawing, the next classes that will extend JPanel. **/
+                // Where is the button on the GUI
+                /* 3 JPanel : 2 to stack Figure button & color button,
+                 and 1 with our Drawing, the next classes that will extend JPanel. */
                 JPanel southLeftPanel = new JPanel();
                 southLeftPanel.setLayout(new GridLayout(2,4));
                 southLeftPanel.add(noir);
@@ -131,7 +129,7 @@ public class Window extends JFrame implements ActionListener {
                 //allow the drawing instance to work on the GUI
                 contentPanel.add(drawing, "Center");
 
-                // Rend la fenêtre visible
+                // Make the window visible
                 this.setVisible(true);
         }
 
@@ -142,52 +140,33 @@ public class Window extends JFrame implements ActionListener {
             // if the case value has the same value of the text in the pressed button, the case will be executed.
             String cmd = e.getActionCommand();
                 switch (cmd) {
-                    case "Auteur":
-                        JOptionPane info = new JOptionPane();
-                        info.showInternalMessageDialog( info, "Auteur : Benoît Tin-sang",
-                                "information",JOptionPane.INFORMATION_MESSAGE);
-
-                    case "Noir":
-                        System.out.println("Black");
-                        // set a new color to the drawing object
-                        drawing.setColor(Color.black);
-                        break;
-                    case "Rouge" :
-                        drawing.setColor(Color.red);
-                        break;
-                    case "Bleu" :
-                        drawing.setColor(Color.blue);
-                        break;
-                    case "Vert" :
-                        drawing.setColor(Color.green);
-                        break;
-                    case "Jaune" :
-                        drawing.setColor(Color.yellow);
-                        break;
-                    case "Rose" :
-                        drawing.setColor(Color.pink);
-                        break;
-                    case "Magenta" :
-                        drawing.setColor(Color.magenta);
-                        break;
-                    case "Orange" :
-                        drawing.setColor(Color.orange);
-                        break;
-
-                    case "Rectangle" :
-                        // set a new figure to the drawing objet.
-                        System.out.println("Rectangle");
-                        drawing.setNameFigure("Rectangle");
-                        break;
-                    case "Ellipse" :
-                        drawing.setNameFigure("Ellipse");
-                        break;
-                    case "Cercle" :
-                        drawing.setNameFigure("Cercle");
-                        break;
-                    case "Carre" :
-                        drawing.setNameFigure("Carré");
-                        break;
+                        case "Auteur" -> {
+                                JOptionPane info = new JOptionPane();
+                                info.showInternalMessageDialog(info, "Auteur : Benoît Tin-sang",
+                                        "information", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        case "Quit" -> System.exit(0);
+                        case "New" -> drawing.reset();
+                        case "Noir" -> {
+                                System.out.println("Black");
+                                // set a new color to the drawing object
+                                drawing.setColor(Color.black);
+                        }
+                        case "Rouge" -> drawing.setColor(Color.red);
+                        case "Bleu" -> drawing.setColor(Color.blue);
+                        case "Vert" -> drawing.setColor(Color.green);
+                        case "Jaune" -> drawing.setColor(Color.yellow);
+                        case "Rose" -> drawing.setColor(Color.pink);
+                        case "Magenta" -> drawing.setColor(Color.magenta);
+                        case "Orange" -> drawing.setColor(Color.orange);
+                        case "Rectangle" -> {
+                                // set a new figure to the drawing objet.
+                                System.out.println("Rectangle");
+                                drawing.setNameFigure("Rectangle");
+                        }
+                        case "Ellipse" -> drawing.setNameFigure("Ellipse");
+                        case "Cercle" -> drawing.setNameFigure("Cercle");
+                        case "Carre" -> drawing.setNameFigure("Carré");
                 }
         }
 

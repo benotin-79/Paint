@@ -10,9 +10,9 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     private Color currentColor;
     private String nameFigure;
     // Implementation of a Figures ArrayList to store our Figures
-    ArrayList<Figure> listFigure= new ArrayList<Figure>();
-    private int currentX, currentY, oldX, oldY;
-
+    ArrayList<Figure> listFigure= new ArrayList<>();
+    private int oldX;
+    private int oldY;
     public void setColor(Color color) {this.currentColor = color;}
     public void setNameFigure(String nameFigure){this.nameFigure=nameFigure;}
 
@@ -47,17 +47,17 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     @Override
     //when a mouse button is pressed on a component and then dragged
     public void mouseDragged(MouseEvent e) {
-        currentX=e.getX();
-        currentY=e.getY();
+        int currentX = e.getX();
+        int currentY = e.getY();
         // we have to convert the last element of the array to an object to be able to set his origin and his BoundingBox.
         listFigure.get(listFigure.size() - 1).setBoundingBox(Math.abs(currentY - oldY), Math.abs(currentX - oldX));
         // North-est compare to the origin.
-        if((currentY-oldY) >= 0 && (currentX-oldX) >= 0 ) {
+        if((currentY -oldY) >= 0 && (currentX -oldX) >= 0 ) {
         // The left edges of the figure are at x origin and the top edges are at y origin.
             listFigure.get(listFigure.size()-1).setOrigin(oldX,oldY);
         }
         // South-est compare to the origin.
-        else if ((currentY-oldY) < 0 && (currentX-oldX) >= 0){
+        else if ((currentY -oldY) < 0 && (currentX -oldX) >= 0){
             if (nameFigure.equals("Carré")||nameFigure.equals("Cercle")) {
                 if (Math.abs(currentX - oldX) < Math.abs(currentY - oldY)) {
                     listFigure.get(listFigure.size() - 1).setOrigin(oldX, currentY);
@@ -67,28 +67,28 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
                 }
             }
             else{
-                listFigure.get(listFigure.size() - 1).setOrigin(oldX,currentY);
+                listFigure.get(listFigure.size() - 1).setOrigin(oldX, currentY);
             }
         }
         // South-west compare to the origin.
-        else if ((currentY-oldY) < 0 && (currentX-oldX) < 0){
+        else if ((currentY -oldY) < 0 && (currentX -oldX) < 0){
             if (nameFigure.equals("Carré")||nameFigure.equals("Cercle")) {
                 if (Math.abs(currentX - oldX) < Math.abs(currentY - oldY)) {
-                    listFigure.get(listFigure.size() - 1).setOrigin(oldX - Math.abs((currentY-oldY)), currentY);
+                    listFigure.get(listFigure.size() - 1).setOrigin(oldX - Math.abs((currentY -oldY)), currentY);
                 }
                 else {
                     listFigure.get(listFigure.size() - 1).setOrigin(currentX, oldY - Math.abs((currentX - oldX)));
                 }
             }
             else{
-                listFigure.get(listFigure.size() - 1).setOrigin(currentX,currentY);
+                listFigure.get(listFigure.size() - 1).setOrigin(currentX, currentY);
             }
         }
         // North-west compare to the origin.
-        else if ((currentY-oldY) >= 0 && (currentX-oldX) < 0){
+        else if ((currentY -oldY) >= 0 && (currentX -oldX) < 0){
             if (nameFigure.equals("Carré")||nameFigure.equals("Cercle")){
-                if (Math.abs(currentX-oldX) < Math.abs(currentY-oldY)){
-                    listFigure.get(listFigure.size()-1).setOrigin(oldX-(currentY-oldY),oldY);
+                if (Math.abs(currentX -oldX) < Math.abs(currentY -oldY)){
+                    listFigure.get(listFigure.size()-1).setOrigin(oldX-(currentY -oldY),oldY);
                 }
                 else{
                     listFigure.get(listFigure.size()-1).setOrigin(currentX,oldY);
@@ -119,21 +119,20 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
         //When we pressed a figure button on the GUI, it will store the name figure in our ArrayList
         switch (nameFigure) {
-            case "Ellipse":
-                listFigure.add(new Ellipse(oldX, oldY, this.currentColor));
-                break;
-            case "Rectangle":
-                listFigure.add(new Rectangle(oldX, oldY, this.currentColor));
-                break;
-            case "Cercle":
-                listFigure.add(new Circle(oldX, oldY, this.currentColor));
-                break;
-            case "Carré":
-                listFigure.add(new Square(oldX, oldY, this.currentColor));
-                break;
+            case "Ellipse" -> listFigure.add(new Ellipse(oldX, oldY, this.currentColor));
+            case "Rectangle" -> listFigure.add(new Rectangle(oldX, oldY, this.currentColor));
+            case "Cercle" -> listFigure.add(new Circle(oldX, oldY, this.currentColor));
+            case "Carré" -> listFigure.add(new Square(oldX, oldY, this.currentColor));
         }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
+
+    public void reset() {
+        // remove all the created figures in the list.
+        listFigure.clear();
+        // method to refresh the graphics
+        paintComponent(getGraphics());
+    }
 }

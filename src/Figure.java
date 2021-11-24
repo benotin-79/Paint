@@ -20,6 +20,6 @@ public abstract class Figure{
 
     @Override
     public String toString(){
-        return "Figure: " + origin + "\nCouleur: " + color;
+        return "Figure: " + origin + "\nColor: " + color;
     }
 }
